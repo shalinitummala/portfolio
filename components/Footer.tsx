@@ -11,9 +11,8 @@ const Footer = () => {
             Shalini Tummala
           </span>
           <span className="w-1 h-1 rounded-full bg-zinc-600" />
-          <span className="text-xs text-zinc-500 font-medium italic">
-            © {year}. Written in Next.js because plain HTML wasn't complicated
-            enough.
+          <span className="text-xs text-zinc-500 font-medium">
+            © {year} Tummala Shalini. Built with Next.js, React & Tailwind CSS.
           </span>
         </div>
 

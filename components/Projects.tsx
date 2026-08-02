@@ -3,44 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-
-const projects = [
-  {
-    title: "Auto Docker",
-    description:
-      "A VS code extension with 400+ downloads. Yes, 400 people trust me to generate their Dockerfiles.",
-    tags: ["TypeScript", "Docker", "VS Code API"],
-    link: "/autodocker",
-    github: "https://github.com/shalinitummala/Auto-Docker.git",
-    number: "01",
-  },
-  {
-    title: "QuizFlow",
-    description:
-      "Mentored someone to build this secure test platform. Basically, I carried the project emotionally.",
-    tags: ["Spring Boot", "React", "Supabase"],
-    github: "https://github.com/shalinitummala/Quiz-app.git",
-    number: "02",
-  },
-  {
-    title: "RCC Coverage",
-    description:
-      "A real portal for managing events. Actually useful, surprisingly.",
-    tags: ["React", "Supabase", "Vercel"],
-    link: "https://rcciit-coverage.vercel.app/",
-    github: "https://github.com/shalinitummala/rcciit-coverage.git",
-    number: "03",
-  },
-  {
-    title: "NetDiscover",
-    description:
-      "Because pressing 'Scan' basically makes you Mr. Robot. A network scanner with a hostile UX.",
-    tags: ["Python", "Networking", "Next.js"],
-    link: "/netdiscover",
-    github: "https://github.com/shalinitummala/netdiscover.git",
-    number: "04",
-  },
-];
+import { projectsData } from "@/content/projects/data";
 
 export default function Projects() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
@@ -51,17 +14,16 @@ export default function Projects() {
         <div className="mb-12 border-b border-zinc-800 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <h2 className="text-5xl md:text-7xl font-display font-bold text-zinc-100 tracking-tighter">
-              Stuff I{" "}
-              <span className="text-rose-500 italic font-serif">Built</span>
+              Featured <span className="text-rose-500 italic font-serif">Projects</span>
             </h2>
             <p className="text-zinc-500 font-mono text-sm mt-4 uppercase tracking-widest">
-              (I swear I'll finish them next weekend)
+              (SDE & SDET Portfolio Projects: Full Stack + Automated Testing)
             </p>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row h-[700px] md:h-[500px] gap-4 w-full">
-          {projects.map((project, i) => {
+          {projectsData.map((project, i) => {
             const isHovered = hoveredIndex === i;
             return (
               <motion.div
@@ -116,6 +78,12 @@ export default function Projects() {
                     <p className="text-zinc-300 font-body text-base md:text-lg leading-relaxed max-w-xl">
                       {project.description}
                     </p>
+
+                    {project.testingDetails && (
+                      <div className="bg-rose-500/5 border border-rose-500/20 rounded-xl p-3 text-xs font-mono text-rose-300">
+                        <span className="font-bold">QA / Testing:</span> {project.testingDetails}
+                      </div>
+                    )}
 
                     <div className="flex flex-wrap gap-3">
                       {project.tags.map((tag, j) => (

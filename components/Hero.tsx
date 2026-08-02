@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { heroData } from "@/content/hero/data";
 
 const springUp = (delay = 0) => ({
   initial: { opacity: 0, y: 50, scale: 0.95 },
@@ -24,47 +25,45 @@ const Hero = () => {
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500" />
           </span>
           <span className="text-xs font-bold text-rose-500 tracking-wider uppercase">
-            Freelancing & breaking pipelines
+            {heroData.statusBadge}
           </span>
         </motion.div>
 
         <h1 className="font-display font-bold text-zinc-100 leading-[1.05] tracking-tight text-5xl sm:text-6xl md:text-7xl mb-6">
-          I write code. <br /> Sometimes it even{" "}
-          <span className="text-rose-500">deploys.</span>
+          {heroData.headlinePart1}
+          <span className="text-rose-500">{heroData.headlineHighlight}</span>
         </h1>
 
         <p className="text-zinc-400 font-body leading-relaxed text-lg md:text-xl max-w-2xl mb-10">
           Hi, I'm{" "}
           <span className="relative inline-block group">
             <strong className="font-display font-bold text-2xl md:text-3xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-rose-600 cursor-default drop-shadow-[0_0_10px_rgba(244,63,94,0.2)]">
-              Shalini Tummala
+              {heroData.name}
             </strong>
             <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-rose-400 to-rose-600 origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
           </span>
-          . I babysit servers and gently remind developers that "it works on my
-          machine" isn't a valid deployment strategy. I also freelance to build
-          websites for clients who "definitely know what they want".
+          . {heroData.bio}
         </p>
 
         <div className="flex flex-wrap gap-6 items-center">
           <motion.a
             whileHover={{ scale: 1.05, x: 5 }}
             whileTap={{ scale: 0.95 }}
-            href="#projects"
+            href={heroData.primaryCta.href}
             className="font-bold text-rose-500 hover:text-rose-400 transition-colors uppercase tracking-widest text-sm flex items-center gap-2"
           >
-            See my 400+ download flex &rarr;
+            {heroData.primaryCta.text}
           </motion.a>
 
           <motion.a
             whileHover={{ scale: 1.05, x: 5 }}
             whileTap={{ scale: 0.95 }}
-            href="https://medium.com/@shalinitummala7"
-            target="_blank"
-            rel="noreferrer"
+            href={heroData.secondaryCta.href}
+            target={heroData.secondaryCta.external ? "_blank" : undefined}
+            rel={heroData.secondaryCta.external ? "noreferrer" : undefined}
             className="font-medium text-zinc-400 hover:text-rose-400 transition-colors text-sm flex items-center gap-2"
           >
-            Read my Rants (Medium Blogs)
+            {heroData.secondaryCta.text}
           </motion.a>
         </div>
       </div>

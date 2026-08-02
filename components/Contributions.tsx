@@ -2,16 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FaLinkedin, FaMicrophoneAlt } from "react-icons/fa";
-
-const contributions = [
-  {
-    title: "Speaking Engagement",
-    platform: "LinkedIn",
-    link: "https://www.linkedin.com/feed/update/urn:li:activity:7445910008212656128/",
-    id: "SPK-001",
-    date: "2024",
-  },
-];
+import { contributionsData } from "@/content/contributions/data";
 
 export default function Contributions() {
   return (
@@ -19,18 +10,17 @@ export default function Contributions() {
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 md:px-0">
         <div className="mb-16 border-b border-zinc-800 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h2 className="text-5xl md:text-6xl font-display font-bold text-zinc-100 tracking-tighter">
-              Public{" "}
-              <span className="text-rose-500 italic font-serif">Speaking</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-zinc-100 tracking-tighter">
+              Career <span className="text-rose-500 italic font-serif">Focus</span>
             </h2>
             <p className="text-zinc-500 font-mono text-sm mt-4 uppercase tracking-widest">
-              (People actually listened)
+              (Target Roles & Professional Outlook)
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-6">
-          {contributions.map((item, i) => (
+          {contributionsData.map((item, i) => (
             <motion.a
               key={i}
               href={item.link}
@@ -62,7 +52,7 @@ export default function Contributions() {
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
                     </span>
                     <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-rose-400">
-                      Live Recording
+                      {item.roleType}
                     </span>
                   </div>
                   <span className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest border border-zinc-800 px-2 py-1 rounded">
@@ -70,14 +60,20 @@ export default function Contributions() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-zinc-100 group-hover:text-white transition-colors">
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-zinc-100 group-hover:text-white transition-colors mb-2">
                   {item.title}
                 </h3>
 
-                <div className="flex items-center justify-center sm:justify-start gap-2 mt-4 text-sm font-medium text-zinc-400 group-hover:text-zinc-300 transition-colors">
-                  <FaLinkedin className="text-[#0A66C2] text-lg" />
-                  <span>View on {item.platform}</span>
-                </div>
+                <p className="text-sm text-zinc-400 font-body mb-4 leading-relaxed">
+                  {item.description}
+                </p>
+
+                {item.platform && (
+                  <div className="flex items-center justify-center sm:justify-start gap-2 text-sm font-medium text-zinc-400 group-hover:text-rose-400 transition-colors">
+                    <FaLinkedin className="text-[#0A66C2] text-lg" />
+                    <span>Connect on {item.platform}</span>
+                  </div>
+                )}
               </div>
 
               <div className="shrink-0 w-12 h-12 hidden sm:flex rounded-full border border-zinc-800 items-center justify-center bg-zinc-950 group-hover:bg-rose-500 group-hover:border-rose-500 transition-all duration-500 z-10">

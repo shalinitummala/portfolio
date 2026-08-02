@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { aboutData } from "@/content/about/data";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -15,11 +16,10 @@ const About = () => {
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <motion.div {...fadeUp(0)} className="mb-12 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-zinc-100 mb-4 tracking-tight">
-            About <span className="text-sky-400">Me.</span>
+            {aboutData.heading} <span className="text-sky-400">{aboutData.headingHighlight}</span>
           </h2>
           <p className="text-zinc-500 font-body max-w-xl mx-auto md:mx-0">
-            Most engineers ship features. I ship the platform that makes
-            shipping features possible.
+            {aboutData.subheading}
           </p>
         </motion.div>
 
@@ -32,27 +32,12 @@ const About = () => {
 
             <div className="relative z-10">
               <h3 className="text-xl font-bold text-zinc-100 mb-4 font-display">
-                The Backbone of Production
+                {aboutData.cardTitle}
               </h3>
               <div className="space-y-4 text-zinc-400 font-body text-sm leading-relaxed">
-                <p>
-                  As the{" "}
-                  <strong className="text-zinc-200 font-medium">
-                    Founding Engineer at Bechohub
-                  </strong>
-                  , I own the full DevOps lifecycle. From designing
-                  containerization strategies to cloud architecture, I build
-                  systems that are resilient, scalable, and secure.
-                </p>
-                <p>
-                  Previously, I optimized CI/CD pipelines at Geogo Techsolution,
-                  cutting deployment times by 40%. I also created{" "}
-                  <strong className="text-zinc-200 font-medium">
-                    Auto Docker
-                  </strong>
-                  , a VS Code extension currently saving hours of boilerplate
-                  setup for 500+ active developers.
-                </p>
+                {aboutData.paragraphs.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -61,22 +46,16 @@ const About = () => {
             {...fadeUp(0.2)}
             className="md:col-span-4 skiper-card p-8 md:p-10 flex flex-col justify-center"
           >
-            <div className="mb-6">
-              <div className="text-4xl font-bold text-zinc-100 font-display mb-1">
-                500+
+            {aboutData.stats.map((stat, index) => (
+              <div key={index} className={index < aboutData.stats.length - 1 ? "mb-6" : ""}>
+                <div className="text-4xl font-bold text-zinc-100 font-display mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-xs font-medium text-sky-400 uppercase tracking-wider">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-xs font-medium text-sky-400 uppercase tracking-wider">
-                Devs using my tools
-              </div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-zinc-100 font-display mb-1">
-                40%
-              </div>
-              <div className="text-xs font-medium text-sky-400 uppercase tracking-wider">
-                Deploy time reduced
-              </div>
-            </div>
+            ))}
           </motion.div>
 
           <motion.div
@@ -88,21 +67,17 @@ const About = () => {
                 <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
                 <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
                 <div className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                <span className="ml-2 text-zinc-600">server-status.sh</span>
+                <span className="ml-2 text-zinc-600">{aboutData.systemStatus.filename}</span>
               </div>
               <p className="mb-2">
                 <span className="text-sky-500">➜</span>{" "}
-                <span className="text-zinc-500">~</span> ./check-systems
+                <span className="text-zinc-500">~</span> {aboutData.systemStatus.command}
               </p>
-              <p className="text-emerald-400/90 mb-1">
-                ✔ Kubernetes Cluster: Healthy (3/3 nodes)
-              </p>
-              <p className="text-emerald-400/90 mb-1">
-                ✔ CI/CD Pipelines: Passing
-              </p>
-              <p className="text-emerald-400/90 mb-4">
-                ✔ Production Database: Synced
-              </p>
+              {aboutData.systemStatus.checks.map((check, index) => (
+                <p key={index} className={`text-emerald-400/90 ${index === aboutData.systemStatus.checks.length - 1 ? "mb-4" : "mb-1"}`}>
+                  {check}
+                </p>
+              ))}
               <p>
                 <span className="text-sky-500">➜</span>{" "}
                 <span className="text-zinc-500">~</span>{" "}
@@ -112,12 +87,21 @@ const About = () => {
 
             <div className="md:w-1/3 text-center md:text-left">
               <h4 className="text-lg font-bold text-zinc-100 mb-2 font-display">
-                System Status
+                {aboutData.statusTitle}
               </h4>
-              <p className="text-sm text-zinc-400 font-body">
-                Everything automated. Everything monitored. Sleep better at
-                night knowing the infrastructure handles the rest.
+              <p className="text-sm text-zinc-400 font-body mb-4">
+                {aboutData.statusDescription}
               </p>
+
+              <div className="border-t border-zinc-800 pt-4 mt-2">
+                <h5 className="text-xs font-mono font-bold uppercase tracking-wider text-sky-400 mb-2">Education</h5>
+                {aboutData.education.map((edu, idx) => (
+                  <div key={idx} className="mb-2">
+                    <p className="text-sm font-bold text-zinc-200">{edu.degree}</p>
+                    <p className="text-xs text-zinc-400">{edu.institution} • {edu.grade}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
